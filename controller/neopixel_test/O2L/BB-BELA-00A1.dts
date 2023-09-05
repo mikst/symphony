@@ -1,0 +1,410 @@
+/*
+ * Copyright (C) 2017-2018 <insert>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/pinctrl/am33xx.h>
+
+/ {
+	/*
+	 * Free up the pins used by the cape from the pinmux helpers.
+	 */
+	fragment@0 {
+		target = <&ocp>;
+		__overlay__ {
+			P2_09_pinmux { status = "disabled"; }; 
+			P2_11_pinmux { status = "disabled"; }; 
+			P2_26_pinmux { status = "disabled"; };
+			P2_30_pinmux { status = "disabled"; };
+			P2_32_pinmux { status = "disabled"; };
+			P2_34_pinmux { status = "disabled"; };
+			P1_05_pinmux { status = "disabled"; };
+			P1_06_pinmux { status = "disabled"; };
+			P1_08_pinmux { status = "disabled"; };
+			P1_09_pinmux { status = "disabled"; };
+			P1_10_pinmux { status = "disabled"; };
+			P1_11_pinmux { status = "disabled"; };
+			P1_12_pinmux { status = "disabled"; };
+			P1_26_pinmux { status = "disabled"; };
+			P1_28_pinmux { status = "disabled"; };
+			P1_29_pinmux { status = "disabled"; };
+			P1_33_pinmux { status = "disabled"; };
+			P1_36_pinmux { status = "disabled"; };
+			P9_19_pinmux { status = "disabled"; };
+			P9_20_pinmux { status = "disabled"; };
+			P9_25_pinmux { status = "disabled"; }; /* mcasp0_ahclkx */
+			P9_28_pinmux { status = "disabled"; }; /* mcasp0_axr2 */
+			P9_29_pinmux { status = "disabled"; }; /* mcasp0_fsx */
+			P9_31_pinmux { status = "disabled"; }; /* mcasp0_ahclk */
+			// P9_30 handled separately below
+
+			P9_22_pinmux { status = "disabled"; }; /* spi0_sclk */
+			P9_21_pinmux { status = "disabled"; }; /* spi0_d0 */
+			P9_18_pinmux { status = "disabled"; }; /* spi0_d1 */
+			P9_17_pinmux { status = "disabled"; }; /* spi0_cs0 */
+		};
+	};
+
+	fragment@1 {
+		target = <&i2c0>;
+		__overlay__ {
+			tda19988 {
+				status = "disabled";
+			};
+		};
+	};
+
+	fragment@2 {
+		target = <&am33xx_pinmux>;
+		__overlay__ {
+			/* Pinmux for McASP0 (audio i/o) */
+			bela_audio_codec_pins: pinmux_bela_audio_codec_pins {
+				pinctrl-single,pins = <
+					0x1ac 0x00 /* mcasp0_ahclkx, 		P9_25 | MODE0 | OUTPUT_PULLDOWN */
+					0x19c 0x22 /* mcasp0_axr2, 			P9_28 | MODE2 | INPUT_PULLDOWN */
+					0x194 0x20 /* mcasp0_fsx, 			P9_29 | MODE0 | INPUT_PULLDOWN */
+					0x190 0x20 /* mcasp0_aclkx, 		P9_31 | MODE0 | INPUT_PULLDOWN */
+					/* For AXR3 on P8.33 we add instead an
+					 * entry to bone-pinmux-helper below so that config-pin can handle it at
+					 * runtime and manage the conflict with CTAG pins */
+					/* For AXR0 on P9.30 we do something similar so that it can be used
+					 * for SPI */
+				>;
+			};
+
+			/* Pinmux for McSPI0 (analog i/o) */
+			bela_spi0_pins: pinmux_bela_spi0_pins {
+				pinctrl-single,pins = <
+					0x150 0x30 /* spi0_sclk, 			P9_22 | MODE0 | INPUT_PULLUP */
+					0x154 0x30 /* spi0_d0, 				P9_21 | MODE0 | INPUT_PULLUP */
+					0x158 0x10 /* spi0_d1, 				P9_18 | MODE0 | OUTPUT_PULLUP */
+					0x15c 0x27 /* spi0_cs0, 			P9_17 | MODE0 | OUTPUT_PULLUP */
+				>;
+			};
+
+			bela_pru_pins: pinmux_bela_pru_pins {
+				pinctrl-single,pins = <
+					/* Pinmux for PRU */
+					0x0b0 0x25 /* pr1_pru1_pru_r30_4, 	P8_41 | MODE5 | INPUT_PULLDOWN */
+					0x0b4 0x25 /* pr1_pru1_pru_r30_5, 	P8_42 | MODE5 | INPUT_PULLDOWN */
+					0x0ac 0x25 /* pr1_pru1_pru_r30_3, 	P8_44 | MODE5 | INPUT_PULLDOWN */
+					0x0a0 0x25 /* pr1_pru1_pru_r30_0, 	P8_45 | MODE5 | INPUT_PULLDOWN */
+					0x0a4 0x25 /* pr1_pru1_pru_r30_1, 	P8_46 | MODE5 | INPUT_PULLDOWN */
+					0x0a8 0x25 /* pr1_pru1_pru_r30_2, 	P8_43 | MODE5 | INPUT_PULLDOWN */
+					// Note: the below are not part of bela_pru_pins, however we cannot have them in a separate group
+					// if there is no driver associated with it
+					/* Is needed for pin multiplexing Bela button correctly */
+					0x1a4 0x37 /* gpio3[19], 			P9_27 | MODE7 | INPUT_PULLUP */
+				>;
+			};
+
+			P2_01_bela: pinmux_default_bela0 { pinctrl-single,pins = <0x48 0x27>; };
+			P2_02_bela: pinmux_default_bela1 { pinctrl-single,pins = <0x6c 0x27>; };
+			P2_04_bela: pinmux_default_bela2 { pinctrl-single,pins = <0x68 0x27>; };
+			P2_06_bela: pinmux_default_bela3 { pinctrl-single,pins = <0x64 0x27>; };
+			P2_08_bela: pinmux_default_bela4 { pinctrl-single,pins = <0x78 0x27>; };
+			P2_10_bela: pinmux_default_bela5 { pinctrl-single,pins = <0x50 0x27>; };
+			P2_18_bela: pinmux_default_bela6 { pinctrl-single,pins = <0x3c 0x27>; };
+			P2_20_bela: pinmux_default_bela7 { pinctrl-single,pins = <0x88 0x27>; };
+			P2_22_bela: pinmux_default_bela8 { pinctrl-single,pins = <0x38 0x27>; };
+			P2_24_bela: pinmux_default_bela9 { pinctrl-single,pins = <0x30 0x27>; };
+			P2_25_bela: pinmux_default_bela10 { pinctrl-single,pins = <0x16c 0x27>; };
+			P2_27_bela: pinmux_default_bela11 { pinctrl-single,pins = <0x168 0x27>; };
+			P2_35_bela: pinmux_default_bela12 { pinctrl-single,pins = <0xe0 0x27>; };
+			P1_35_bela: pinmux_default_bela13 { pinctrl-single,pins = <0xe8 0x27>; };
+			P1_32_bela: pinmux_default_bela14 { pinctrl-single,pins = <0x170 0x27>; };
+			P1_30_bela: pinmux_default_bela15 { pinctrl-single,pins = <0x174 0x27>; };
+			P1_02_bela: pinmux_default_led0 { pinctrl-single,pins = <0xe4 0x27>; };
+			P1_04_bela: pinmux_default_led1 { pinctrl-single,pins = <0xec 0x27>; };
+
+			/* Pinmux for i2c on Bela header */
+			i2c1_pins: pinmux_i2c1_pins {
+				pinctrl-single,pins = <
+					0x180 0x33 /* i2c1_sda, 	P9_26 | MODE3 | INPUT_PULLUP */
+					0x184 0x33 /* i2c1_scl,		P9_24 | MODE3 | INPUT_PULLUP */
+				>;
+			};
+
+			// Pinmux for i2c2 for Bela codec
+			i2c2_pins: pinmux_i2c2_pins {
+				pinctrl-single,pins = <
+					0x17c 0x33 // i2c2_scl | P9.20/P1.28 | MODE3 | INPUT_PULLUP
+					0x178 0x33 // i2c2_sda | P9.19/P1.26 | MODE3 | INPUT_PULLUP
+				>;
+			};
+
+			/* pinmux for BB digitals */
+			bb_digitals: pinmux_bb_digitals {
+				pinctrl-single,pins = <
+					/* Pinmux for GPIO (digital i/o) */
+					0x090 0x27 /* gpio2[2], 			P8_07 | MODE7 | INPUT_PULLDOWN */
+					0x094 0x27 /* gpio2[3], 			P8_08 | MODE7 | INPUT_PULLDOWN */
+					0x09c 0x27 /* gpio2[5], 			P8_09 | MODE7 | INPUT_PULLDOWN */
+					0x098 0x27 /* gpio2[4], 			P8_10 | MODE7 | INPUT_PULLDOWN */
+					0x034 0x27 /* gpio1[13],			P8_11 | MODE7 | INPUT_PULLDOWN */
+					0x030 0x27 /* gpio2[13],			P8_12 | MODE7 | INPUT_PULLDOWN */
+					0x078 0x27 /* gpio1[28],			P9_12 | MODE7 | INPUT_PULLDOWN */
+					0x048 0x27 /* gpio1[18],			P9_14 | MODE7 | INPUT_PULLDOWN */
+					0x03c 0x27 /* gpio1[15],			P8_15 | MODE7 | INPUT_PULLDOWN */
+					0x038 0x27 /* gpio1[14], 			P8_16 | MODE7 | INPUT_PULLDOWN */
+					0x04c 0x27 /* gpio1[19],			P9_16 | MODE7 | INPUT_PULLDOWN */
+					0x08c 0x27 /* gpio2[1], 			P8_18 | MODE7 | INPUT_PULLDOWN */
+					0x0e0 0x27 /* gpio2[22],			P8_27 | MODE7 | INPUT_PULLDOWN */
+					0x0e8 0x27 /* gpio2[24],			P8_28 | MODE7 | INPUT_PULLDOWN */
+					0x0e4 0x27 /* gpio2[23],			P8_29 | MODE7 | INPUT_PULLDOWN */
+					0x0ec 0x27 /* gpio2[25],			P8_30 | MODE7 | INPUT_PULLDOWN */
+				>;
+			};	
+		};
+	};
+
+	fragment@3 {
+		target = <&i2c1>;
+		__overlay__ {
+			pinctrl-names = "default";
+			pinctrl-0 = <&i2c1_pins>;
+
+			status = "okay";
+			clock-frequency = <400000>;
+		};
+	};
+
+	/* McASP config */
+	fragment@4 {
+		target = <&mcasp0>;
+		__overlay__ {
+			pinctrl-names = "default";
+			pinctrl-0 = <&bela_audio_codec_pins>;
+			pinctrl-1 = <&bela_pru_pins>;
+
+			status = "okay";
+			interrupt-names = "dummytx", "dummyrx";
+
+			op-mode = <0>;	// MCASP_IIS_MODE
+			tdm-slots = <2>;
+			num-serializer = <16>;
+			serial-dir = <  // 0: INACTIVE, 1: TX, 2: RX
+				2 0 1 0
+				0 0 0 0
+				0 0 0 0
+				0 0 0 0
+			>;
+			tx-num-evt = <1>;
+			rx-num-evt = <1>;
+		};
+	};
+
+	/* PRU config */
+	fragment@5 {
+		target-path="/";
+		__overlay__ {
+			ocp {
+				#address-cells = <1>;
+				#size-cells = <1>;
+
+				pruss: pruss@4a300000 {
+					status = "okay";
+					compatible = "ti,pruss-v2";
+					ti,hwmods = "pruss";
+					ti,deassert-hard-reset = "pruss", "pruss";
+					reg = <0x4a300000 0x080000>;
+					ti,pintc-offset = <0x20000>;
+					interrupt-parent = <&intc>;
+					interrupts = <20 21 22 23 24 25 26 27>;
+
+					pinctrl-names = "default";
+					pinctrl-0 = <&bela_pru_pins>;
+
+					/* Workaround for uio_pruss.c on 4.4.62 to prevent "No Children" error */
+					bela_pru_pins {
+						pin-names = "dummy";
+						gpios = <&gpio1 1 2>;
+						#gpio-cells = <2>;
+					};
+				};
+			};
+		};
+	};
+
+	fragment@6 { // this is only needed by BBG, where uart2 is enabled, and its pins conflict with our spi0
+		target = <&uart2>;
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@7 {
+		target = <&spi0>;
+		__overlay__ {
+			pinctrl-names = "default";
+			pinctrl-0 = <&bela_spi0_pins>;
+
+			status = "okay";
+		};
+	};
+
+	fragment@8 {
+		target = <&ocp>;
+		__overlay__ {
+			P2_01_pinmux{ pinctrl-0 = <&P2_01_bela>; };
+			P2_02_pinmux{ pinctrl-0 = <&P2_02_bela>; };
+			P2_04_pinmux{ pinctrl-0 = <&P2_04_bela>; };
+			P2_06_pinmux{ pinctrl-0 = <&P2_06_bela>; };
+			P2_08_pinmux{ pinctrl-0 = <&P2_08_bela>; };
+			P2_10_pinmux{ pinctrl-0 = <&P2_10_bela>; };
+			P2_18_pinmux{ pinctrl-0 = <&P2_18_bela>; };
+			P2_20_pinmux{ pinctrl-0 = <&P2_20_bela>; };
+			P2_22_pinmux{ pinctrl-0 = <&P2_22_bela>; };
+			P2_24_pinmux{ pinctrl-0 = <&P2_24_bela>; };
+			P2_25_pinmux{ pinctrl-0 = <&P2_25_bela>; };
+			P2_27_pinmux{ pinctrl-0 = <&P2_27_bela>; };
+			P2_35_pinmux{ pinctrl-0 = <&P2_35_bela>; };
+			P1_35_pinmux{ pinctrl-0 = <&P1_35_bela>; };
+			P1_32_pinmux{ pinctrl-0 = <&P1_32_bela>; };
+			P1_30_pinmux{ pinctrl-0 = <&P1_30_bela>; };
+			P1_02_pinmux{ pinctrl-0 = <&P1_02_bela>; };
+			P1_04_pinmux{ pinctrl-0 = <&P1_04_bela>; };
+		};
+	};
+
+	fragment@9 {
+		target-path="/";
+		__overlay__ {
+			bela_digitals {
+				compatible = "gpio-leds";
+				pinctrl-0 = <&bb_digitals>;
+				pinctrl-1 = <&bb_digitals>;
+				pinctrl-names = "default", "sleep";
+			};
+		};
+	};
+			
+	fragment@10 {
+
+		target = <&i2c2>;
+		__overlay__ {
+			pinctrl-names = "default";
+			pinctrl-0 = <&i2c2_pins>;
+
+			status = "okay";
+			clock-frequency = <400000>;
+		};
+
+	};
+	fragment@11 {
+		target = <&am33xx_pinmux>;
+			__overlay__ {
+			/* P8_33 (ZCZ ball V3) hdmi */
+			P8_33_default_pin: pinmux_P8_33_default_pin { pinctrl-single,pins = <
+				AM33XX_IOPAD(0x08d4, PIN_OUTPUT_PULLDOWN | INPUT_EN | MUX_MODE7) >; };	/* lcd_data13.gpio0_9 */
+			P8_33_gpio_pin: pinmux_P8_33_gpio_pin { pinctrl-single,pins = <
+				AM33XX_IOPAD(0x08d4, PIN_OUTPUT | INPUT_EN | MUX_MODE7) >; };		/* lcd_data13.gpio0_9 */
+			P8_33_gpio_pu_pin: pinmux_P8_33_gpio_pu_pin { pinctrl-single,pins = <
+				AM33XX_IOPAD(0x08d4, PIN_OUTPUT_PULLUP | INPUT_EN | MUX_MODE7) >; };	/* lcd_data13.gpio0_9 */
+			P8_33_gpio_pd_pin: pinmux_P8_33_gpio_pd_pin { pinctrl-single,pins = <
+				AM33XX_IOPAD(0x08d4, PIN_OUTPUT_PULLDOWN | INPUT_EN | MUX_MODE7) >; };	/* lcd_data13.gpio0_9 */
+			P8_33_gpio_input_pin: pinmux_P8_33_gpio_input_pin { pinctrl-single,pins = <
+				AM33XX_IOPAD(0x08d4, PIN_INPUT | MUX_MODE7) >; };			/* lcd_data13.gpio0_9 */
+			P8_33_qep_pin: pinmux_P8_33_qep_pin { pinctrl-single,pins = <
+				AM33XX_IOPAD(0x08d4, PIN_OUTPUT_PULLUP | INPUT_EN | MUX_MODE2) >; };	/* lcd_data13.eqep1b_in */
+			P8_33_mcasp_pin: pinmux_P8_33_mcasp_pin { pinctrl-single,pins = <
+				AM33XX_IOPAD(0x08d4, PIN_OUTPUT_PULLDOWN | INPUT_EN | MUX_MODE4) >; };	/* lcd_data13.eqep1b_in */
+		};
+	};
+	fragment@12 {
+		target = <&ocp>;
+			__overlay__ {
+			P8_33_pinmux {
+				compatible = "bone-pinmux-helper";
+				status = "okay";
+				pinctrl-names = "default", "gpio", "gpio_pu", "gpio_pd", "gpio_input", "qep", "mcasp";
+				pinctrl-0 = <&P8_33_default_pin>;
+				pinctrl-1 = <&P8_33_gpio_pin>;
+				pinctrl-2 = <&P8_33_gpio_pu_pin>;
+				pinctrl-3 = <&P8_33_gpio_pd_pin>;
+				pinctrl-4 = <&P8_33_gpio_input_pin>;
+				pinctrl-5 = <&P8_33_qep_pin>;
+				pinctrl-6 = <&P8_33_mcasp_pin>;
+			};
+		};
+	};
+	// the next three fragments allow P9.30 to be used for SPI.
+	// only works for single data line peripherals (e.g.: WS2812B)
+	fragment@13 {
+		target = <&am33xx_pinmux>;
+			__overlay__ {
+			/* P9_30 (ZCZ ball D12) gpio3_16 */
+			P9_30_gpio_pin: pinmux_P9_30_gpio_pin { pinctrl-single,pins = <
+				AM33XX_IOPAD(0x0998, PIN_OUTPUT | INPUT_EN | MUX_MODE7) >; };		/* mcasp0_axr0.gpio3_16 */
+			P9_30_gpio_pu_pin: pinmux_P9_30_gpio_pu_pin { pinctrl-single,pins = <
+				AM33XX_IOPAD(0x0998, PIN_OUTPUT_PULLUP | INPUT_EN | MUX_MODE7) >; };	/* mcasp0_axr0.gpio3_16 */
+			P9_30_gpio_pd_pin: pinmux_P9_30_gpio_pd_pin { pinctrl-single,pins = <
+				AM33XX_IOPAD(0x0998, PIN_OUTPUT_PULLDOWN | INPUT_EN | MUX_MODE7) >; };	/* mcasp0_axr0.gpio3_16 */
+			P9_30_gpio_input_pin: pinmux_P9_30_gpio_input_pin { pinctrl-single,pins = <
+				AM33XX_IOPAD(0x0998, PIN_INPUT | MUX_MODE7) >; };			/* mcasp0_axr0.gpio3_16 */
+			P9_30_pwm_pin: pinmux_P9_30_pwm_pin { pinctrl-single,pins = <
+				AM33XX_IOPAD(0x0998, PIN_OUTPUT_PULLDOWN | INPUT_EN | MUX_MODE1) >; };	/* mcasp0_axr0.ehrpwm0_tripzone_input */
+			P9_30_spi_pin: pinmux_P9_30_spi_pin { pinctrl-single,pins = <
+				AM33XX_IOPAD(0x0998, PIN_OUTPUT_PULLUP | INPUT_EN | MUX_MODE3) >; };	/* mcasp0_axr0.spi1_d1 */
+			P9_30_pruout_pin: pinmux_P9_30_pruout_pin { pinctrl-single,pins = <
+				AM33XX_IOPAD(0x0998, PIN_OUTPUT_PULLDOWN | INPUT_EN | MUX_MODE5) >; };	/* mcasp0_axr0.pru0_out2 */
+			P9_30_pruin_pin: pinmux_P9_30_pruin_pin { pinctrl-single,pins = <
+				AM33XX_IOPAD(0x0998, PIN_INPUT | MUX_MODE6) >; };			/* mcasp0_axr0.pru0_in2 */
+			P9_30_mcasp_pin: pinmux_P9_30_mcasp_pin { pinctrl-single,pins = <
+				AM33XX_IOPAD(0x0998, PIN_INPUT | MUX_MODE0) >; };			/* mcasp0_axr0.mcasp0_axr0 */
+		};
+	};
+	fragment@14 {
+		target = <&ocp>;
+		__overlay__ {
+			P9_30_pinmux {
+				compatible = "bone-pinmux-helper";
+				status = "okay";
+				pinctrl-names = "default", "gpio", "gpio_pu", "gpio_pd", "gpio_input", "spi", "pwm", "pruout", "pruin", "mcasp";
+				pinctrl-0 = <&P9_30_mcasp_pin>; // set mcasp as default so no changes to the core code are needed
+				pinctrl-1 = <&P9_30_gpio_pin>;
+				pinctrl-2 = <&P9_30_gpio_pu_pin>;
+				pinctrl-3 = <&P9_30_gpio_pd_pin>;
+				pinctrl-4 = <&P9_30_gpio_input_pin>;
+				pinctrl-5 = <&P9_30_spi_pin>;
+				pinctrl-6 = <&P9_30_pwm_pin>;
+				pinctrl-7 = <&P9_30_pruout_pin>;
+				pinctrl-8 = <&P9_30_pruin_pin>;
+				pinctrl-9 = <&P9_30_mcasp_pin>;
+			};
+		};
+	};
+	fragment@15 {
+		target = <&spi1>;
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			status = "okay";
+
+			channel@0 {
+				#address-cells = <1>;
+				#size-cells = <0>;
+				compatible = "spidev";
+				symlink = "spi/1.0";
+				reg = <0>;
+				spi-max-frequency = <24000000>;
+			};
+
+			channel@1 {
+				#address-cells = <1>;
+				#size-cells = <0>;
+				compatible = "spidev";
+				symlink = "spi/1.1";
+				reg = <1>;
+				spi-max-frequency = <24000000>;
+			};
+		};
+	};
+};
