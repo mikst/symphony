@@ -10,6 +10,7 @@
 #X obj 27 146 route val1 val2 volume calib play inst mode;
 #X obj 283 183 s mode;
 #X obj 30 79 zmq_sub 192.168.0.100:5555 control;
+#X obj 326 94 print SUB;
 #X connect 0 0 8 0;
 #X connect 1 0 10 0;
 #X connect 8 0 2 0;
@@ -20,3 +21,4 @@
 #X connect 8 5 7 0;
 #X connect 8 6 9 0;
 #X connect 10 0 0 0;
+#X connect 10 0 11 0;
