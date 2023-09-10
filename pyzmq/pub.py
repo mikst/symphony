@@ -1,5 +1,13 @@
 import zmq
-xsub_addr = 'tcp://192.168.0.10:5556'
+import socket
+
+hostname = socket.gethostname()
+IPAddr = socket.gethostbyname(hostname)
+port = 5556
+protocol = 'tcp'
+
+xsub_addr = ''.join([protocol], '://', IPAddr, ':', port)
+
 context = zmq.Context()
 publisherSocket = context.socket(zmq.PUB)
 publisherSocket.connect(xsub_addr)

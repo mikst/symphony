@@ -1,7 +1,15 @@
 import zmq
+import socket
 
-xpub_addr = 'tcp://0.0.0.0:5555'
-xsub_addr = 'tcp://0.0.0.0:5556'
+hostname = socket.gethostname()
+IPAddr = socket.gethostbyname(hostname)
+protocol = 'tcp'
+
+port_p = 5555
+port_s = 5556
+
+xpub_addr = ''.join([protocol], '://', IPAddr, ':', port_p)
+xsub_addr = ''.join([protocol], '://', IPAddr, ':', port_s)
 context = zmq.Context()
 
 #create XPUB
