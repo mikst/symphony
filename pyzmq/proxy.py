@@ -26,10 +26,14 @@ poller = zmq.Poller()
 poller.register(xpub_socket, zmq.POLLIN)
 poller.register(xsub_socket, zmq.POLLIN)
 
+ready = False
 
 while True:
     # get event
     event = dict(poller.poll(1000))
+    if ready == False:
+        print("Now listening on " + str(IPAddr))
+        ready = True
     if xpub_socket in event:
         message = xpub_socket.recv_multipart()
         #print("[BROKER] xpub_socket recv message: %r" % message)
