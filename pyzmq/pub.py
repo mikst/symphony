@@ -1,12 +1,13 @@
 import zmq
-import socket
+import subprocess
 
-hostname = socket.gethostname()
-IPAddr = socket.gethostbyname(hostname)
+result = subprocess.check_output(['ipconfig', 'getifaddr', 'en0'], universal_newlines=True)
+IPAddr = result.strip()
+
 port = 5556
 protocol = 'tcp'
 
-xsub_addr = ''.join([protocol], '://', IPAddr, ':', port)
+xsub_addr = ''.join([protocol, '://', str(IPAddr), ':', str(port)])
 
 context = zmq.Context()
 publisherSocket = context.socket(zmq.PUB)

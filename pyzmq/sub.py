@@ -1,12 +1,13 @@
 import zmq
-import socket
+import subprocess
 
-hostname = socket.gethostname()
-IPAddr = socket.gethostbyname(hostname)
+result = subprocess.check_output(['ipconfig', 'getifaddr', 'en0'], universal_newlines=True)
+IPAddr = result.strip()
+
 port = 5555
 protocol = 'tcp'
 
-xpub_addr = ''.join([protocol], '://', IPAddr, ':', port)
+xpub_addr = ''.join([protocol, '://', str(IPAddr), ':', str(port)])
 context = zmq.Context()
 subscriberSocket = context.socket(zmq.SUB)
 subscriberSocket.connect(xpub_addr)
