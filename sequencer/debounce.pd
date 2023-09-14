@@ -1,0 +1,16 @@
+#N canvas 202 323 450 300 12;
+#X obj 115 68 spigot;
+#X obj 165 68 tgl 19 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 1;
+#X obj 122 37 inlet;
+#X obj 227 64 loadbang;
+#X obj 111 129 outlet;
+#X obj 140 92 delay 200;
+#X obj 167 116 delay 200;
+#X connect 0 0 4 0;
+#X connect 0 0 5 0;
+#X connect 1 0 0 1;
+#X connect 2 0 0 0;
+#X connect 3 0 1 0;
+#X connect 5 0 1 0;
+#X connect 5 0 6 0;
+#X connect 6 0 1 0;
