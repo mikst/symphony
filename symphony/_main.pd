@@ -1,4 +1,4 @@
-#N canvas 2 23 1265 755 12;
+#N canvas 488 518 1265 473 12;
 #X obj 60 301 tgl 19 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 1;
 #X obj 101 298 tgl 19 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 1;
 #X obj 154 298 tgl 19 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 1;
@@ -614,6 +614,12 @@
 #X text 94 60 send sensor reading to communciation;
 #X obj 71 38 r debug;
 #X obj 63 336 mode1_string;
+#X obj 559 160 simple_loop;
+#X obj 650 131 bng 19 250 50 0 empty empty empty 0 -10 0 12 #00ff04 #000000 #000000;
+#X obj 529 131 bng 19 250 50 0 empty empty empty 0 -10 0 12 #ff0400 #000000 #000000;
+#X obj 559 131 bng 19 250 50 0 empty empty empty 0 -10 0 12 #00faff #000000 #000000;
+#X obj 593 131 bng 19 250 50 0 empty empty empty 0 -10 0 12 #9c00ff #000000 #000000;
+#X obj 621 131 bng 19 250 50 0 empty empty empty 0 -10 0 12 #faff00 #000000 #000000;
 #X connect 0 0 46 0;
 #X connect 1 0 46 1;
 #X connect 2 0 46 2;
@@ -645,3 +651,8 @@
 #X connect 38 0 18 0;
 #X connect 45 0 18 0;
 #X connect 46 0 23 0;
+#X connect 48 0 47 4;
+#X connect 49 0 47 0;
+#X connect 50 0 47 1;
+#X connect 51 0 47 2;
+#X connect 52 0 47 3;
