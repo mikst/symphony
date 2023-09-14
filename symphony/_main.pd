@@ -1,4 +1,4 @@
-#N canvas 148 23 930 734 12;
+#N canvas 148 25 930 734 12;
 #X declare -lib rcp;
 #X obj 624 29 declare -lib rcp;
 #X obj 624 105 init;
@@ -595,7 +595,7 @@
 #X msg 104 317 connect 127.0.0.1 7562;
 #X msg 104 395 disconnect;
 #X msg 105 368 connect 192.168.0.54 7562;
-#N canvas 80 23 1200 628 LEDV3 1;
+#N canvas 80 25 1200 628 LEDV3 1;
 #X obj 164 22 inlet;
 #X obj 110 269 zl join;
 #X obj 509 31 inlet;
@@ -774,6 +774,12 @@
 #X obj 732 555 r my_id;
 #X obj 732 577 route p3;
 #X obj 732 611 t b;
+#X obj 654 179 simple_loop;
+#X obj 745 150 bng 19 250 50 0 empty empty empty 0 -10 0 12 #00ff04 #000000 #000000;
+#X obj 624 150 bng 19 250 50 0 empty empty empty 0 -10 0 12 #ff0400 #000000 #000000;
+#X obj 654 150 bng 19 250 50 0 empty empty empty 0 -10 0 12 #00faff #000000 #000000;
+#X obj 688 150 bng 19 250 50 0 empty empty empty 0 -10 0 12 #9c00ff #000000 #000000;
+#X obj 716 150 bng 19 250 50 0 empty empty empty 0 -10 0 12 #faff00 #000000 #000000;
 #X connect 4 0 5 0;
 #X connect 4 1 6 0;
 #X connect 8 0 12 0;
@@ -823,3 +829,8 @@
 #X connect 56 0 57 0;
 #X connect 57 0 58 0;
 #X connect 58 0 54 0;
+#X connect 60 0 59 4;
+#X connect 61 0 59 0;
+#X connect 62 0 59 1;
+#X connect 63 0 59 2;
+#X connect 64 0 59 3;
