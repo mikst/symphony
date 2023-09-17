@@ -436,6 +436,7 @@
 #X obj 244 421 r snaremsg;
 #X obj 695 421 r snaremsg;
 #X obj 1145 421 r snaremsg;
+#X text 1210 791 TODO: If array[n] is 0 set array[n] 1 if array[n] is 1 set array[n] 0 This will allow the user to delete a beat;
 #X connect 0 0 18 0;
 #X connect 0 1 18 0;
 #X connect 0 2 18 0;
