@@ -333,7 +333,6 @@
 #X obj 1140 167 s hatmsg;
 #X floatatom 499 543 5 0 0 0 - - - 0;
 #X obj 420 542 bng 19 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
-#X obj 420 513 r snarekmsg;
 #X obj 420 571 array get snareSequence;
 #X floatatom 909 543 5 0 0 0 - - - 0;
 #X obj 837 542 bng 19 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
@@ -342,6 +341,7 @@
 #X obj 10 600 print kickSequence \$1;
 #X obj 420 600 print snareSequence \$1;
 #X obj 837 600 print hatSequence \$1;
+#X obj 420 513 r snaremsg;
 #X connect 0 0 18 0;
 #X connect 0 1 18 0;
 #X connect 0 2 18 0;
@@ -474,13 +474,13 @@
 #X connect 91 16 92 0;
 #X connect 94 0 96 1;
 #X connect 95 0 96 0;
-#X connect 96 0 109 0;
+#X connect 96 0 108 0;
 #X connect 97 0 95 0;
-#X connect 101 0 104 1;
-#X connect 102 0 104 0;
-#X connect 103 0 102 0;
-#X connect 104 0 110 0;
-#X connect 105 0 108 1;
-#X connect 106 0 108 0;
-#X connect 107 0 106 0;
-#X connect 108 0 111 0;
+#X connect 101 0 103 1;
+#X connect 102 0 103 0;
+#X connect 103 0 109 0;
+#X connect 104 0 107 1;
+#X connect 105 0 107 0;
+#X connect 106 0 105 0;
+#X connect 107 0 110 0;
+#X connect 111 0 102 0;
