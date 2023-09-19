@@ -26,6 +26,11 @@
 #X msg 186 285 sensor \$1;
 #X obj 107 374 list prepend send;
 #X obj 106 337 list prepend sensor;
+#X obj 755 489 list trim;
+#X obj 753 358 list prepend send;
+#X obj 752 321 list prepend seq;
+#X obj 750 214 r seq_message;
+#X obj 753 269 list prepend all;
 #X connect 1 0 3 0;
 #X connect 2 0 5 0;
 #X connect 3 0 10 0;
@@ -54,3 +59,8 @@
 #X connect 24 0 26 1;
 #X connect 25 0 4 0;
 #X connect 26 0 25 0;
+#X connect 27 0 4 0;
+#X connect 28 0 27 0;
+#X connect 29 0 28 0;
+#X connect 30 0 31 0;
+#X connect 31 0 29 0;
