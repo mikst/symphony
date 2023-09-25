@@ -1,0 +1,13 @@
+#N canvas 131 166 888 555 12;
+#X obj 105 184 list trim;
+#X obj 298 113 list append 255;
+#X obj 298 76 inlet color;
+#X obj 105 56 inlet list;
+#X obj 103 250 outlet;
+#X obj 104 159 list prepend 0.5 0.5 0.5 255;
+#X text 394 74 RGB color value between 0-1;
+#X connect 0 0 4 0;
+#X connect 1 0 5 1;
+#X connect 2 0 1 0;
+#X connect 3 0 5 0;
+#X connect 5 0 0 0;
