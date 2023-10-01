@@ -72,7 +72,7 @@ syncing ${IP}"
 
     if (( $? == 0 )); then
         echo "running rsync for ${IP}"
-        rsync -azP --delete -e "ssh -o StrictHostKeyChecking=no" ${SRC_FOLDER} root@${IP_PREFIX}${i}:${DST_FOLDER}
+        rsync -azP --delete -e "ssh -o StrictHostKeyChecking=no" --exclude 'settings.json' --exclude 'build' ${SRC_FOLDER} root@${IP_PREFIX}${i}:${DST_FOLDER}
     else
         echo "could not ping ${IP}"
     fi
