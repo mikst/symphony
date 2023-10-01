@@ -4,8 +4,8 @@
 # ./sync.sh 1
 # ./sync.sh 1 100
 
-SRC_FOLDER=/Users/inx/Documents/_mika/_symphony/dir1/
-DST_FOLDER=/root/Bela/projects/synctest
+SRC_FOLDER=/Users/mikst/Documents/_PROJECT/jupiter/PD/Strahl/symphony_v2/
+DST_FOLDER=/root/Bela/projects/symphony
 IP_PREFIX="192.168.0."
 
 #192.168.0.101 = 1
@@ -42,17 +42,17 @@ FROM_ID=$((FROM_ID + 100))
 TO_ID=$((TO_ID + 100))
 
 if (( FROM_ID < 101 )); then
-    echo "invalid range: id must be >= 1"
+    echo "invalid range. id must be >= 1"
     exit
 fi
 
 if (( FROM_ID >= 200 )); then
-    echo "invalid range: id must be < 100"
+    echo "invalid range. id must be < 100"
     exit
 fi
 
 if (( TO_ID < FROM_ID )); then
-    echo "invalid range: from-id must be < to-id"
+    echo "invalid range. from-ip must be <= to-ip"
     exit
 fi
 
