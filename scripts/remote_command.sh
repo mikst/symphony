@@ -18,8 +18,8 @@ print_udage () {
     echo "usage:"
     echo "remote_command id1 [id2] command"
     echo
-    echo "id1:      from-id (1..100)"
-    echo "id2:      to-id, optional (1..100). if not specified id1 is used. (id1 <= id2)"
+    echo "id1:      from-id (1..99)"
+    echo "id2:      to-id, optional (1..99). if not specified id1 is used. (id1 <= id2)"
     echo "command:  the command to execute on the device in the range specified"
     echo
 }

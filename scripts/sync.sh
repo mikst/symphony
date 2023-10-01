@@ -42,17 +42,17 @@ FROM_ID=$((FROM_ID + 100))
 TO_ID=$((TO_ID + 100))
 
 if (( FROM_ID < 101 )); then
-    echo "invalid range. id must be >= 1"
+    echo "invalid range: id must be >= 1"
     exit
 fi
 
 if (( FROM_ID >= 200 )); then
-    echo "invalid range. id must be < 100"
+    echo "invalid range: id must be < 100"
     exit
 fi
 
 if (( TO_ID < FROM_ID )); then
-    echo "invalid range. from-ip must be <= to-ip"
+    echo "invalid range: from-id must be < to-id"
     exit
 fi
 
