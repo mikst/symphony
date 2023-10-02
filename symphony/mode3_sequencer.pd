@@ -1,4 +1,4 @@
-#N canvas 0 40 1790 1032 12;
+#N canvas 0 45 1790 1032 12;
 #X obj 225 687 inlet;
 #X obj 370 687 inlet;
 #X obj 72 684 inlet;
@@ -627,7 +627,7 @@
 #X connect 5 0 2 0;
 #X connect 6 0 4 0;
 #X restore 906 474 pd inputKick;
-#N canvas 302 189 905 484 Sequencer_Kick 0;
+#N canvas 302 201 582 442 Sequencer_Kick 0;
 #X obj 12 44 r resetKicks;
 #X msg 12 73 \; kickSequence const 0;
 #X floatatom 87 156 5 0 0 0 - - - 0;
@@ -661,7 +661,7 @@
 #X obj 209 222 t b b;
 #X obj 110 44 r resetDrum;
 #X obj 244 16 r kickmsg;
-#N canvas 0 433 500 229 kickSequences 0;
+#N canvas 0 461 500 229 kickSequences 0;
 #N canvas 614 639 450 278 (subpatch) 0;
 #X array kickSequence 12 float 2;
 #X coords 0 2 12 -1 200 140 1 0 0;
@@ -1038,7 +1038,7 @@
 #X text 562 867 test fadeoff;
 #X obj 1238 727 *~;
 #X obj 1273 727 r fadeoff_amount;
-#N canvas 1345 65 428 387 fadeloop 1;
+#N canvas 1345 65 428 387 fadeloop 0;
 #X obj 347 29 r fadeoff;
 #X obj 347 77 +;
 #X obj 382 77 1;
@@ -1113,6 +1113,8 @@
 #X connect 31 0 32 0;
 #X restore 1137 834 pd fadeloop;
 #X floatatom 1273 751 5 0 0 0 - - - 0;
+#X obj 1561 326 s fadeoff_amount;
+#X msg 1561 302 1;
 #X connect 0 0 93 0;
 #X connect 0 0 217 0;
 #X connect 1 0 94 0;
@@ -1136,6 +1138,7 @@
 #X connect 27 0 17 3;
 #X connect 27 0 84 0;
 #X connect 27 0 130 0;
+#X connect 27 0 224 0;
 #X connect 29 0 79 0;
 #X connect 30 0 79 0;
 #X connect 32 0 33 0;
@@ -1336,3 +1339,4 @@
 #X connect 219 0 131 0;
 #X connect 220 0 219 1;
 #X connect 220 0 222 0;
+#X connect 224 0 223 0;
