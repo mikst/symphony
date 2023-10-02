@@ -405,7 +405,7 @@
 #X obj 66 576 s seq_message \$1;
 #X obj 276 576 s seq_message \$1;
 #X obj 1532 352 s reset_counter;
-#X obj 1137 709 outlet~;
+#X obj 1238 756 outlet~;
 #X obj 940 694 inlet;
 #X text 936 668 jam mode;
 #X obj 966 721 tgl 19 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 1;
@@ -1069,6 +1069,8 @@
 #X obj 1324 937 delay 200;
 #X obj 1324 889 delay 100;
 #X obj 1324 913 s resetDrum;
+#X obj 1238 727 *~;
+#X obj 1273 727 r fadeoff_amount;
 #X connect 0 0 93 0;
 #X connect 0 0 225 0;
 #X connect 1 0 94 0;
@@ -1268,8 +1270,8 @@
 #X connect 195 3 196 0;
 #X connect 197 0 147 1;
 #X connect 197 0 148 1;
-#X connect 198 0 131 0;
-#X connect 199 0 131 0;
+#X connect 198 0 252 0;
+#X connect 199 0 252 0;
 #X connect 200 0 210 0;
 #X connect 201 0 155 0;
 #X connect 201 1 192 0;
@@ -1286,7 +1288,7 @@
 #X connect 209 0 206 0;
 #X connect 209 1 207 0;
 #X connect 209 2 206 0;
-#X connect 210 0 131 0;
+#X connect 210 0 252 0;
 #X connect 211 0 219 0;
 #X connect 212 0 213 0;
 #X connect 212 0 214 0;
@@ -1326,3 +1328,5 @@
 #X connect 247 0 248 0;
 #X connect 249 0 247 0;
 #X connect 250 0 251 0;
+#X connect 252 0 131 0;
+#X connect 253 0 252 1;
