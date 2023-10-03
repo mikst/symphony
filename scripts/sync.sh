@@ -8,6 +8,9 @@ SRC_FOLDER=/Users/mikst/Documents/_PROJECT/jupiter/PD/Strahl/symphony_v2/
 DST_FOLDER=/root/Bela/projects/symphony
 IP_PREFIX="192.168.0."
 
+# if bela is on cable
+# IP_PREFIX="192.168.6."
+
 #192.168.0.101 = 1
 #..
 #192.168.0.180 = 80
@@ -56,6 +59,9 @@ if (( TO_ID < FROM_ID )); then
     exit
 fi
 
+# if bela is on cable
+# FROM_ID=2
+# TO_ID=2
 
 echo "sycing from ${FROM_ID} to ${TO_ID}"
 
@@ -72,7 +78,7 @@ syncing ${IP}"
 
     if (( $? == 0 )); then
         echo "running rsync for ${IP}"
-        rsync -azP --delete -e "ssh -o StrictHostKeyChecking=no" --exclude 'settings.json' --exclude 'build' ${SRC_FOLDER} root@${IP_PREFIX}${i}:${DST_FOLDER}
+        rsync -azP --delete -e "ssh -o StrictHostKeyChecking=no" --exclude 'symphony' --exclude 'settings.json' --exclude 'build' ${SRC_FOLDER} root@${IP_PREFIX}${i}:${DST_FOLDER}
     else
         echo "could not ping ${IP}"
     fi

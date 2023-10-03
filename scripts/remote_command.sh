@@ -4,7 +4,16 @@
 # remote_command id1 [id2] command
 
 
+# commands
+# run project
+# ./remote_command.sh id1 id2 /root/Bela/scripts/run_project.sh symphony &
+# stop running
+# ./remote_command.sh id1 id2 /root/Bela/scripts/stop_running.sh
+
 IP_PREFIX="192.168.0."
+
+# if bela is on cable
+#IP_PREFIX="192.168.6."
 
 # vars
 IP_OFFSET=100
@@ -68,6 +77,12 @@ if (( TO_ID < FROM_ID )); then
     echo "invalid range. from-ip must be <= to-ip"
     exit
 fi
+
+
+# if bela is on cable
+# FROM_ID=2
+# TO_ID=2
+
 
 # arguments seem fine - continue
 

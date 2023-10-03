@@ -2,10 +2,14 @@
 
 PROJECT_FOLDER=/root/Bela/projects/
 IP_PREFIX="192.168.0."
+
+# if bela is on cable
+#IP_PREFIX="192.168.6."
+
 IP_OFFSET=100
 
 
-print_udage () {
+print_usage () {
     echo
     echo "usage:"
     echo "remotell.sh id project_folder"
@@ -18,7 +22,7 @@ print_udage () {
 
 if [ -z ${1+x} ]; then
     echo "invalid range: no id set"
-    print_udage
+    print_usage
     exit
 fi
 
@@ -33,6 +37,9 @@ if (( ID >= 200 )); then
     echo "invalid range: id must be < 100"
     exit
 fi
+
+# if bela is on cable
+# ID=2
 
 IP=${IP_PREFIX}${ID}
 
