@@ -3,17 +3,16 @@
 # usage:
 # remote_command id1 [id2] command
 
-
 # commands
 # run project
-# ./remote_command.sh id1 id2 /root/Bela/scripts/run_project.sh symphony &
+# ./remote_command.sh id1 id2 /root/Bela/scripts/run_project.sh -b symphony
 # stop running
 # ./remote_command.sh id1 id2 /root/Bela/scripts/stop_running.sh
 
-IP_PREFIX="192.168.0."
 
+IP_PREFIX="192.168.0."
 # if bela is on cable
-#IP_PREFIX="192.168.6."
+# IP_PREFIX="192.168.7."
 
 # vars
 IP_OFFSET=100
@@ -35,7 +34,7 @@ print_udage () {
 
 case $1 in
     ''|*[!0-9]*)
-        echo "syncing everything? (y/n)"
+        echo "run command on all devices? (y/n)"
         read sure
         if [ "$sure" != "y" ]; then
             exit
