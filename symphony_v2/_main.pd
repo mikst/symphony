@@ -1,4 +1,4 @@
-#N canvas 165 71 1217 755 12;
+#N canvas 420 56 1217 755 12;
 #X obj 970 80 init;
 #N canvas 446 117 834 446 sensor 0;
 #X obj 111 155 snapshot~;
@@ -203,6 +203,7 @@
 #X obj 232 364 s sensor2;
 #X obj 114 331 change;
 #X obj 230 330 change;
+#X obj 428 116 tgl 19 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 1;
 #X connect 0 0 15 0;
 #X connect 0 0 9 1;
 #X connect 0 0 12 0;
@@ -245,6 +246,7 @@
 #X connect 25 0 3 0;
 #X connect 28 0 26 0;
 #X connect 29 0 27 0;
+#X connect 30 0 8 0;
 #X restore 35 100 pd sensor;
 #X obj 825 223 s mode;
 #X obj 889 29 loadbang;
@@ -690,9 +692,11 @@
 #X obj 1063 370 print instrument;
 #X obj 968 280 print id;
 #X obj 1064 320 r insttype;
-#X obj 968 256 r my_id;
+#X obj 968 226 r my_id;
 #X obj 968 352 list trim;
 #X obj 1063 345 list trim;
+#X obj 968 253 i;
+#X obj 940 227 bng 19 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
 #X connect 3 0 40 0;
 #X connect 4 0 1 0;
 #X connect 6 0 1 0;
@@ -751,6 +755,8 @@
 #X connect 67 0 43 0;
 #X connect 68 0 74 0;
 #X connect 72 0 75 0;
-#X connect 73 0 71 0;
+#X connect 73 0 76 0;
 #X connect 74 0 69 0;
 #X connect 75 0 70 0;
+#X connect 76 0 71 0;
+#X connect 77 0 76 0;

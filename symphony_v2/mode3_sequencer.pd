@@ -1,4 +1,4 @@
-#N canvas 0 23 1280 642 12;
+#N canvas 0 128 1597 924 12;
 #X obj 72 684 inlet;
 #X obj 119 685 tgl 19 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 1;
 #X obj 516 688 inlet;
@@ -1272,6 +1272,7 @@
 #X obj 383 763 spigot;
 #X obj 650 686 r mode;
 #X obj 648 838 > 0;
+#X obj 350 881 print unknown seq command;
 #X connect 0 0 11 0;
 #X connect 1 0 11 0;
 #X connect 11 0 82 0;
@@ -1456,6 +1457,7 @@
 #X connect 188 1 103 0;
 #X connect 188 2 105 0;
 #X connect 188 3 189 0;
+#X connect 188 4 231 0;
 #X connect 190 0 193 0;
 #X connect 191 0 149 0;
 #X connect 191 1 185 0;
