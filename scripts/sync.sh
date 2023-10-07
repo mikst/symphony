@@ -4,7 +4,7 @@
 # ./sync.sh 1
 # ./sync.sh 1 100
 
-SRC_FOLDER=/Users/inx/Documents/_mika/_symphony/_src/symphony_v2/
+SRC_FOLDER=/Users/mikst/Documents/_PROJECT/jupiter/PD/Strahl/symphony_v2/
 DST_FOLDER=/root/Bela/projects/symphony
 IP_PREFIX="192.168.0."
 
