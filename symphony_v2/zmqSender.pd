@@ -26,11 +26,12 @@
 #X obj 753 358 list prepend send;
 #X obj 752 321 list prepend seq;
 #X obj 750 214 r seq_message;
-#X obj 753 269 list prepend all;
+#X obj 752 255 list prepend all;
 #X obj 567 376 i;
 #X obj 567 408 pack 0 s;
 #X msg 508 671 connect tcp://192.168.0.100:5556;
 #X msg 413 630 connect tcp://192.168.0.100:5556;
+#X obj 753 287 list prepend all;
 #X connect 1 0 7 0;
 #X connect 2 0 4 0;
 #X connect 3 0 17 0;
@@ -58,8 +59,9 @@
 #X connect 24 0 23 0;
 #X connect 25 0 24 0;
 #X connect 26 0 27 0;
-#X connect 27 0 25 0;
+#X connect 27 0 32 0;
 #X connect 28 0 29 0;
 #X connect 29 0 11 0;
 #X connect 29 0 12 0;
 #X connect 31 0 17 0;
+#X connect 32 0 25 0;
