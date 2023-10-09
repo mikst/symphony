@@ -1,4 +1,4 @@
-#N canvas 93 23 1187 755 12;
+#N canvas 70 147 1187 755 12;
 #X obj 134 28 r wifi_ready;
 #X obj 55 519 s val1;
 #X obj 92 487 s val2;
@@ -81,7 +81,6 @@
 #X connect 15 0 10 0;
 #X connect 16 0 63 0;
 #X connect 16 1 64 0;
-#X connect 16 2 59 0;
 #X connect 24 0 10 0;
 #X connect 25 0 5 0;
 #X connect 26 0 20 0;
