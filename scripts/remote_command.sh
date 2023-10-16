@@ -98,7 +98,7 @@ do
     # try to ping device
     # check result of command
     # INFO: option -o: Exit successfully after receiving one reply packet
-    RES=`ping -o -t 1 -W 1 -c 1 ${IP}`
+    RES=`ping -o -t 1 -W 1 -c 10 ${IP}`
 
     if (( $? == 0 )); then
         echo "
