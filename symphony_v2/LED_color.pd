@@ -11,7 +11,7 @@
 #X obj 334 170 list;
 #X msg 471 344 <index> <intensity> r g b r g b r g b;
 #X obj 104 108 t a b b;
-#X obj 427 168 i;
+#X obj 427 167 i 255;
 #X connect 0 0 4 0;
 #X connect 1 0 6 1;
 #X connect 2 0 1 0;

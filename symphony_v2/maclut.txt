@@ -61,7 +61,6 @@
 5C:62:8B:9D:D2:CE 58 audience cello;
 5C:62:8B:9E:36:20 59 audience cello;
 5C:62:8B:9E:35:49 60 audience cello;
-
 5C:62:8B:67:9B:46 61 audience cello;
 5C:62:8B:67:AA:A2 62 audience cello;
 5C:62:8B:67:E1:8B 63 audience cello;

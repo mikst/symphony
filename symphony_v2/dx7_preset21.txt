@@ -1,0 +1,25 @@
+all toOscs 1 level 1;
+all toOscs 1 ratio 0;
+all toOscs 1 env 5 902.289 62 1825.2;
+
+all toOscs 2 level 1;
+all toOscs 2 ratio 8;
+all toOscs 2 env 5 1265.62 59 1512.3;
+
+all toOscs 3 level 1;
+all toOscs 3 ratio 0;
+all toOscs 3 env 5 446.631 18 1872.3;
+
+all toOscs 4 level 1;
+all toOscs 4 ratio 0;
+all toOscs 4 env 5 5.184 4 346.8;
+
+all toOscs 5 level 1;
+all toOscs 5 ratio 2;
+all toOscs 5 env 5 31.944 12 388.8;
+
+all toOscs 6 level 1;
+all toOscs 6 ratio 2;
+all toOscs 6 env 1386 0.192 47 1116.3;
+
+all algorithm 32;
