@@ -10,7 +10,7 @@
 # ./remote_command.sh id1 id2 /root/Bela/scripts/stop_running.sh
 
 
-IP_PREFIX="192.168.0."
+ IP_PREFIX="192.168.0."
 # if bela is on cable
 # IP_PREFIX="192.168.7."
 
@@ -61,7 +61,7 @@ if [ -z ${COMMAND+x} ]; then
 fi
 
 # check from
-if (( FROM_ID < 101 )); then
+if (( FROM_ID < $((IP_OFFSET + 1)) )); then
     echo "invalid range. id must be >= 1"
     exit
 fi
