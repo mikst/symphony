@@ -52,7 +52,7 @@
 #X msg 592 41 9;
 #X obj 269 11 tgl 16 0 empty empty empty 0 -8 0 10 #fcfcfc #000000 #000000 0 1;
 #X obj 8 9 tgl 16 0 empty empty empty 0 -8 0 10 #fcfcfc #000000 #000000 0 1;
-#N canvas 100 23 994 755 sparkleLED 1;
+#N canvas 100 23 994 755 sparkleLED 0;
 #X obj 152 694 s LEDstrip1;
 #X obj 651 690 s LEDstrip2;
 #X obj 153 664 LED_color;
@@ -498,7 +498,7 @@
 #X obj 26 183 poly 2 1, f 10;
 #X obj 29 396 clone dx7Poly 2;
 #X obj 674 97 / 2;
-#N canvas 51 97 1181 681 counter 0;
+#N canvas 51 97 1181 681 counter 1;
 #X obj 144 100 inlet;
 #X msg 54 199 0;
 #X text 142 76 Start clock;
